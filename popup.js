@@ -41,6 +41,11 @@ chrome.storage.sync.get({
                 $('#message')
                 .html('<div class="message cabot-unauthorised"><i class="fa fa-lock fa-5x"></i><br>Youre not authorised for this server.<br>Click here to log in.</div>');
             }
+
+            if (jqXHR.status == 0) {
+                $('#message')
+                .html('<div class="message cabot-no-connection"><i class="fa fa-question fa-5x"></i><br>Unable to read service data from ' + services_api_url + '</div>');
+            }
         },
         success: function(data, textStatus, jqXHR) {
             var context = {services: data, server_url: server_url};
