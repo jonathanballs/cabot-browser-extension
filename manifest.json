@@ -12,7 +12,8 @@
 
   "permissions": [
     "activeTab",
-    "https://ajax.googleapis.com/"
+    "https://ajax.googleapis.com/",
+    "storage"
   ],
 
   "browser_action": {
@@ -23,5 +24,8 @@
 
   "icons": { "128": "img/arachnys/icon_128.png" },
 
-  "options_page": "options/options.html"
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  }
 }

@@ -1,0 +1,12 @@
+label {
+    width: 30%;
+}
+
+input {
+    width: 70%;
+    float:right;
+}
+
+.input_row {
+    padding-bottom: 20px;
+}

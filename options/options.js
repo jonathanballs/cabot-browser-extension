@@ -1,17 +1,21 @@
-// Saves options to chrome.storage
+// Saves options to chrome.storage.sync.
 function save_options() {
-  var color = document.getElementById('color').value;
-  var likesColor = document.getElementById('like').checked;
+
+  var api_url = document.getElementById('api_url').value;
+  var username = document.getElementById('username').value;
+  var password = document.getElementById('password').value;
+
   chrome.storage.sync.set({
-    favoriteColor: color,
-    likesColor: likesColor
+    apiUrl: api_url,
+    userName: username,
+    passWord: password,
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
     status.textContent = 'Options saved.';
     setTimeout(function() {
       status.textContent = '';
-    }, 750);
+    }, 1000);
   });
 }
 
@@ -20,11 +24,13 @@ function save_options() {
 function restore_options() {
   // Use default value color = 'red' and likesColor = true.
   chrome.storage.sync.get({
-    favoriteColor: 'red',
-    likesColor: true
+    apiUrl: '',
+    userName: '',
+    passWord: '',
   }, function(items) {
-    document.getElementById('color').value = items.favoriteColor;
-    document.getElementById('like').checked = items.likesColor;
+    document.getElementById('api_url').value = items.apiUrl;
+    document.getElementById('username').value = items.userName;
+    document.getElementById('password').value = items.passWord;
   });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
