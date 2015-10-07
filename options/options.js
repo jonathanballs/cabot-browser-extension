@@ -1,12 +1,12 @@
 // Saves options to chrome.storage.sync.
 function save_options() {
 
-  var api_url = document.getElementById('api_url').value;
+  var server_url = document.getElementById('server_url').value;
   var username = document.getElementById('username').value;
   var password = document.getElementById('password').value;
 
   chrome.storage.sync.set({
-    apiUrl: api_url,
+    serverUrl: server_url,
     userName: username,
     passWord: password,
   }, function() {
@@ -24,11 +24,11 @@ function save_options() {
 function restore_options() {
   // Use default value color = 'red' and likesColor = true.
   chrome.storage.sync.get({
-    apiUrl: '',
+    serverUrl: '',
     userName: '',
     passWord: '',
   }, function(items) {
-    document.getElementById('api_url').value = items.apiUrl;
+    document.getElementById('server_url').value = items.serverUrl;
     document.getElementById('username').value = items.userName;
     document.getElementById('password').value = items.passWord;
   });
