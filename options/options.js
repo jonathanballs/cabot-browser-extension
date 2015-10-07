@@ -1,14 +1,27 @@
+// Remove trailing slash from url
+function stripTrailingSlash(str) {
+    if(str.substr(-1) === '/') {
+        return str.substr(0, str.length - 1);
+    }
+    return str;
+}
+
+function addhttp(url) {
+   if (!/^(f|ht)tps?:\/\//i.test(url)) {
+      url = "http://" + url;
+   }
+   return url;
+}
+
 // Saves options to chrome.storage.sync.
 function save_options() {
 
   var server_url = document.getElementById('server_url').value;
-  var username = document.getElementById('username').value;
-  var password = document.getElementById('password').value;
+  server_url = stripTrailingSlash(server_url);
+  server_url = addhttp(server_url);
 
   chrome.storage.sync.set({
-    serverUrl: server_url,
-    userName: username,
-    passWord: password,
+    serverUrl: server_url
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -24,13 +37,9 @@ function save_options() {
 function restore_options() {
   // Use default value color = 'red' and likesColor = true.
   chrome.storage.sync.get({
-    serverUrl: '',
-    userName: '',
-    passWord: '',
+    serverUrl: ''
   }, function(items) {
     document.getElementById('server_url').value = items.serverUrl;
-    document.getElementById('username').value = items.userName;
-    document.getElementById('password').value = items.passWord;
   });
 }
 document.addEventListener('DOMContentLoaded', restore_options);

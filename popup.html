@@ -1,37 +1,64 @@
-<!doctype html>
-<!--
- This page is shown when the extension button is clicked, because the
- "browser_action" field in manifest.json contains the "default_popup" key with
- value "popup.html".
- -->
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Getting Started Extension's Popup</title>
-    <style>
-      body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 100%;
-      }
-      #status {
-        /* avoid an excessively wide status text */
-        white-space: pre;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        max-width: 400px;
-      }
-    </style>
+<head>
 
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-     -->
-    <script src="popup.js"></script>
-  </head>
-  <body>
-    <div id="status"></div>
-    <img id="image-result" hidden>
-  </body>
+  <meta charset="utf-8">
+  <title>Cabot by Arachnys</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link href="static/bootstrap/css/bootstrap.css" rel="stylesheet" /><link id="chosen-css" href="static/theme/css/chosen.css" rel="stylesheet" /><link href="static/bootstrap/css/dashboard.css" rel="stylesheet" /><link href="static/theme/css/jquery-ui-1.8.21.custom.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="static/arachnys/css/morris.css" type="text/css" /><link rel="stylesheet" href="static/arachnys/css/graph.css" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="popup.css">
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+</head>
+
+<body style="padding-top:0px;">
+  <!-- start: Header -->
+  <div class="container">
+    <div class="row">
+    
+<div class="row sortable ui-sortable">
+  <div class="col-xs-12">
+    
+<table class="table bootstrap-datatable datatable" style="margin-bottom:0px">
+      <thead>
+        <tr>
+          <th style="width:80%;">Name</th>
+          <th style="width:20%;"><span style="float: right;">Checks</span></th>
+        </tr>
+      </thead>
+      <tbody id="service-table-body">
+      </tbody>
+    </table>
+    <div id="message">
+    </div>
+  </div>
+</div>
+
+    </div>
+    <div class="clearfix"></div>
+
+  </div>
+
+  
+  
+<script id="service-template" type="text/x-handlebars-template">
+        {{#each services}}
+        <tr class="service enabled {{#if_eq overall_status "PASSING"}}success{{else}}danger{{/if_eq}}" service-id="{{id}}">
+          <td>
+            <a href="{{../server_url}}/service/{{id}}/" title="Alerts">{{name}}</a>
+          </td>
+          <td>
+            <span class="label label-default" style="float: right;">{{status_checks.length}}</span>
+          </td>
+        </tr>
+        {{/each}}
+</script>
+
+<script type="text/javascript" src="static/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="static/handlebars-v4.0.2.js"></script>
+<script type="text/javascript" src="popup.js"></script>
+
+</body>
 </html>
-

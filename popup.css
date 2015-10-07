@@ -1,0 +1,18 @@
+html {
+    width: 350px;
+}
+
+tr.service {
+    cursor: pointer;
+}
+
+div.message {
+    cursor: pointer;
+    padding: 10px;
+}
+
+div#message {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
