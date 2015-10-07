@@ -32,7 +32,7 @@ window.setInterval(function(){
                       'csrfmiddlewaretoken': cookie.value
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
-                        console.log(jqXHR);
+                        chrome.browserAction.setBadgeText({text: ""});
                         return;
                     },
                     success: function(data, textStatus, jqXHR) {
