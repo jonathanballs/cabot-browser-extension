@@ -64,6 +64,14 @@ chrome.storage.sync.get({
         return false;
     });
 
+    // Take user to services api location if they click on no-connection.
+    // Could be userful for diagnostics
+    $('body').on('click', 'div.cabot-no-connection', function(){
+        var services_api_url = server_url + '/api/services';
+        chrome.tabs.create({url: services_api_url});
+        return false;
+    });
+
     // Open login page in new tab.
     $('body').on('click', 'div.cabot-unauthorised', function(){
         var service_url = server_url + '/accounts/login/?next=/services/';
